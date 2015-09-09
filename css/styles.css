@@ -1,0 +1,29 @@
+body {
+    font-family: "Helvetica";
+}
+
+h1 {
+    font-weight: bold;
+    letter-spacing: -3px;
+}
+
+.navbar {
+    background-color: black;
+    margin: 0px;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+}
+
+.jumbotron p {
+    letter-spacing: -1px;
+}
+
+.btn {
+    background-color: #66CCFF;
+}
