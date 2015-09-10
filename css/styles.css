@@ -27,3 +27,7 @@ h1 {
 .btn {
     background-color: #66CCFF;
 }
+
+.btn:hover {
+    background-color: #52A3CC;
+}
