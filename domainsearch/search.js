@@ -11,6 +11,7 @@ $(function(){
         $.getJSON(redditUrl, function(json){
             var listing = $(json.data.children);
             
+            //loop through json objects
             $.each(listing, function(){
                 var obj = $(listing.data);
                 console.log(obj.title);
