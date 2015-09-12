@@ -12,10 +12,19 @@ $(function(){
             var listing = $(json.data.children);
             
             //loop through json objects
-            $.each(listing, function(){
-                var obj = $(listing.data);
-                console.log(obj.title);
+            $.each(listing, function(i, data){
+                var post = listing[i].data;
+                
+                var title = post.title;
+                var score = post.score;
+                var subreddit = post.subreddit;
+                var linkUrl = post.url;
+                var thumbnail = post.thumbnail;
+                var created = post.created;
+                
             });
+            
+            
         });
     });
 })
