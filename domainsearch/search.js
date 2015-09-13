@@ -1,12 +1,14 @@
 $(function(){
+
     $('#searchform').on('submit', function(event){
         event.preventDefault();
         
         var domain = $('#searchinput').val();
-        console.log(domain + " was submitted");
+        //console.log(domain + " was submitted");
         var searchDomain = domain.replace(/\//g, '');
-        console.log(searchDomain);
         var redditUrl = "https://www.reddit.com/domain/" + searchDomain + "/top/.json";
+        var htmlItems = '';
+        //console.log("json url: " + redditUrl);
         
         $.getJSON(redditUrl, function(json){
             var listing = $(json.data.children);
@@ -20,11 +22,44 @@ $(function(){
                 var subreddit = post.subreddit;
                 var linkUrl = post.url;
                 var thumbnail = post.thumbnail;
-                var created = post.created;
+                var created = post.created_utc;
+                thumbnail = thumbnail.replace('http:' , 'https:');
+                console.log("thumbnail url: " + thumbnail);
                 
-            });
+                if(post.thumbnail == '' || post.thumbnail == 'default'){
+                    thumbnail = 'https://a.thumbs.redditmedia.com/PDQadCzYX_x1bU3KrYuhTptu6eDdOVVagFG6q_Afyb4.jpg';
+                }
+                if(post.thumbnail == 'nsfw'){
+                    thumbnail = 'https://i.imgur.com/UHzw6.png';
+                }
+                
+                htmlItems += generateList(title,score,subreddit,linkUrl,thumbnail,created);
+                console.log(htmlItems);
+                
+            }); //end listing loop
             
+            $('#results').html(htmlItems)
+            //console.log(htmlList);
+        
             
-        });
-    });
-})
+        }); //end json
+    }); //end event listener
+
+    //write html list of items
+    function generateList(title, score, subreddit, linkUrl, thumbnail, created) {
+        var htmlList= '';
+        
+        htmlList += '<li class="row list-group-item">\n';
+        htmlList += '<div class="col-xs-5 col-sm-3 col-md-2">\n';
+        htmlList += '<div class="thumbnail center-block"><img src="'+ thumbnail +'"></div>\n';
+        htmlList += '</div>\n';
+        htmlList += '<div class="col-xs-7 col-sm-9 col-md-10">\n';
+        htmlList += '<h2>'+title+'</h2>';
+        htmlList += '</div>';
+        htmlList += '</li>'
+        //console.log(htmlList);
+        
+        return htmlList;
+    }
+    
+});
