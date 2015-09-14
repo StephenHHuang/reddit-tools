@@ -33,14 +33,10 @@ $(function(){
             //loop through json objects
             $.each(listing, function(i, data){
                 var post = listing[i].data;
-                
                 htmlItems += generateList(post);
-                //console.log(htmlItems);
-                
             }); //end listing loop
             
             $('#results').html(htmlItems)
-            
             
         }); //end json
     }); //end event listener
@@ -50,12 +46,13 @@ $(function(){
     function generateList(post) {
         var htmlList= '';
         var title = post.title;
-        var score = post.score;
-        var subreddit = post.subreddit;
-        var linkUrl = post.url;
         var thumbnail = post.thumbnail;
-        var created = post.created_utc;
+        var linkUrl = post.url;
         var author = post.author;
+        var subreddit = post.subreddit;
+        var created = post.created_utc;
+        
+        var permalink = "https://www.reddit.com/"+post.permalink;
         var authorUrl = "https://www.reddit.com/user/"+author;
         var subredditUrl = "https://www.reddit.com/r/"+subreddit;
         
@@ -73,9 +70,10 @@ $(function(){
         htmlList += '<div class="thumbnail center-block"><img src="'+ thumbnail +'"></div>\n';
         htmlList += '</div>\n';
         htmlList += '<div class="col-xs-7 col-sm-9 col-md-10">\n';
-        htmlList += '<h2>'+title+'</h2>';
-        htmlList += '<p1>submitted by <a href="'+authorUrl+'">/u/'+author+'</a>';
-        htmlList += ' to <a href="'+subredditUrl+'">/r/'+subreddit+'</a></p1>';
+        htmlList += '<h2><a href="'+linkUrl+'">'+title+'</a></h2>';
+        htmlList += '<p>submitted by <a href="'+authorUrl+'">/u/'+author+'</a>';
+        htmlList += ' to <a href="'+subredditUrl+'">/r/'+subreddit+'</a></p>\n';
+        htmlList += '<p><a href="'+permalink+'">view comments on reddit</a></p>';
         htmlList += '</div>';
         htmlList += '</li>'
         console.log(htmlList);
