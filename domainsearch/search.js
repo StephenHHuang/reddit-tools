@@ -4,8 +4,17 @@ $(function(){
         event.preventDefault();
         console.log("submitted");
         
+        //loading gif
+        $('#results').html('<img src="https://media.giphy.com/media/IgQ8E05Dpg2ze/giphy.gif" class="center-block">')
+        
         var domain = $('#searchinput').val();
         //console.log(domain + " was submitted");
+        
+        //empty search box
+        if(domain == ''){
+            $('#results').html('<div class="container text-center"><h2>No results found!</h2></div>');
+            return;
+        }
         var searchDomain = domain.replace(/\//g, '');
         var redditUrl = "https://www.reddit.com/domain/" + searchDomain + "/top/.json";
         var htmlItems = '';
@@ -13,6 +22,13 @@ $(function(){
         
         $.getJSON(redditUrl, function(json){
             var listing = $(json.data.children);
+            var l=listing.length;
+            console.log(l);
+            
+            if(listing.length == 0){
+                 $('#results').html('<div class="container text-center"><h2>No results found!</h2></div>');
+                return;
+            }
             
             //loop through json objects
             $.each(listing, function(i, data){
@@ -24,7 +40,7 @@ $(function(){
             }); //end listing loop
             
             $('#results').html(htmlItems)
-            //console.log(htmlList);
+            
             
         }); //end json
     }); //end event listener
@@ -40,11 +56,10 @@ $(function(){
         var thumbnail = post.thumbnail;
         var created = post.created_utc;
         var author = post.author;
-        var authorUrl = "reddit.com/user/"+author;
+        var authorUrl = "https://www.reddit.com/user/"+author;
+        var subredditUrl = "https://www.reddit.com/r/"+subreddit;
         
         thumbnail = thumbnail.replace('http:' , 'https:');
-        
-        console.log("thumbnail url: " + thumbnail);
         
         if(post.thumbnail == '' || post.thumbnail == 'default'){
             thumbnail = 'https://a.thumbs.redditmedia.com/PDQadCzYX_x1bU3KrYuhTptu6eDdOVVagFG6q_Afyb4.jpg';
@@ -59,10 +74,11 @@ $(function(){
         htmlList += '</div>\n';
         htmlList += '<div class="col-xs-7 col-sm-9 col-md-10">\n';
         htmlList += '<h2>'+title+'</h2>';
-        htmlList += '<p1>submitted by <a href="'+authorUrl+'">'+author+'</a> to /r/'+subreddit+'</p1>';
+        htmlList += '<p1>submitted by <a href="'+authorUrl+'">/u/'+author+'</a>';
+        htmlList += ' to <a href="'+subredditUrl+'">/r/'+subreddit+'</a></p1>';
         htmlList += '</div>';
         htmlList += '</li>'
-        //console.log(htmlList);
+        console.log(htmlList);
         
         return htmlList;
     }
