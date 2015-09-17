@@ -16,7 +16,7 @@ $(function(){
             return;
         }
         var searchDomain = domain.replace(/\//g, '');
-        var redditUrl = "https://www.reddit.com/domain/" + searchDomain + "/top/.json";
+        var redditUrl = "https://www.reddit.com/domain/" + searchDomain + "/top/.json?sort=top&t=all";
         var htmlItems = '';
         //console.log("json url: " + redditUrl);
         
@@ -70,10 +70,10 @@ $(function(){
         htmlList += '<div class="thumbnail center-block"><img src="'+ thumbnail +'"></div>\n';
         htmlList += '</div>\n';
         htmlList += '<div class="col-xs-7 col-sm-9 col-md-10">\n';
-        htmlList += '<h2><a href="'+linkUrl+'">'+title+'</a></h2>';
-        htmlList += '<p>submitted by <a href="'+authorUrl+'">/u/'+author+'</a>';
-        htmlList += ' to <a href="'+subredditUrl+'">/r/'+subreddit+'</a></p>\n';
-        htmlList += '<p><a href="'+permalink+'">view comments on reddit</a></p>';
+        htmlList += '<h2><a href="'+linkUrl+'" target="_blank">'+title+'</a></h2>';
+        htmlList += '<p>submitted by <a href="'+authorUrl+'" target="_blank">/u/'+author+'</a>';
+        htmlList += ' to <a href="'+subredditUrl+'" target="_blank">/r/'+subreddit+'</a></p>\n';
+        htmlList += '<p><a href="'+permalink+'" target="_blank">view comments on reddit</a></p>';
         htmlList += '</div>';
         htmlList += '</li>'
         console.log(htmlList);
