@@ -5,7 +5,7 @@ $(function(){
         console.log("submitted");
         
         //loading gif
-        $('#results').html('<img src="https://media.giphy.com/media/IgQ8E05Dpg2ze/giphy.gif" class="center-block">')
+        $('#results').html('<img src="https://media.giphy.com/media/IgQ8E05Dpg2ze/giphy.gif" class="center-block">');
         
         var domain = $('#searchinput').val();
         //console.log(domain + " was submitted");
@@ -63,6 +63,7 @@ $(function(){
         }
         if(post.thumbnail == 'nsfw'){
             thumbnail = 'https://i.imgur.com/UHzw6.png';
+            title = "**NSFW**"
         }
         
         htmlList += '<li class="row list-group-item">\n';
