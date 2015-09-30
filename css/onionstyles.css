@@ -1,0 +1,58 @@
+body {
+    font-family: "Helvetica";
+    background-color: #EEE ;
+}
+
+h1 {
+    font-weight: bold;
+    letter-spacing: -3px;
+}
+
+h2 {
+    font-weight: bold;
+    letter-spacing: -1px;
+    margin-top: 0px;
+}
+
+.jumbotron p {
+    letter-spacing: -1px;
+}
+
+p {
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+p1 {
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.navbar {
+    background-color: black;
+    margin: 0px;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.jumbotron {
+    margin-bottom: 15px;
+}
+
+.jumbotron p {
+    letter-spacing: -1px;
+}
+
+.btn {
+    background-color: #66CCFF;
+}
+
+.btn:hover {
+    background-color: #52A3CC;
+}
+
+.thumbnail {
+    max-width: 140px;
+}
