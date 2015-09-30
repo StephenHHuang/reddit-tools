@@ -8,7 +8,6 @@ $(function(){
         $('#results').html('<img src="https://media.giphy.com/media/IgQ8E05Dpg2ze/giphy.gif" class="center-block">');
         
         var domain = $('#searchinput').val();
-        //console.log(domain + " was submitted");
         
         //empty search box
         if(domain == ''){
@@ -18,13 +17,12 @@ $(function(){
         var searchDomain = domain.replace(/\//g, '');
         var redditUrl = "https://www.reddit.com/domain/" + searchDomain + "/top/.json?sort=top&t=all";
         var htmlItems = '';
-        //console.log("json url: " + redditUrl);
+      
         
         $.getJSON(redditUrl, function(json){
             var listing = $(json.data.children);
             var l=listing.length;
-            console.log(l);
-            
+          
             if(listing.length == 0){
                  $('#results').html('<div class="container text-center"><h2>No results found!</h2></div>');
                 return;
