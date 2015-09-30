@@ -36,7 +36,7 @@ $(function(){
                 htmlItems += generateList(post);
             }); //end listing loop
             
-            $('#results').html(htmlItems)
+            $('#results').html(htmlItems);
             
         }); //end json
     }); //end event listener
@@ -63,7 +63,7 @@ $(function(){
         }
         if(post.thumbnail == 'nsfw'){
             thumbnail = 'https://i.imgur.com/UHzw6.png';
-            title = "**NSFW**"
+            title = "**NSFW*"
         }
         
         htmlList += '<li class="row list-group-item">\n';
