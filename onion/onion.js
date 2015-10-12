@@ -14,6 +14,11 @@ $(function(){
         seenNotTheOnion: []
     };
     
+    var post = {
+        title: '',
+        subreddit: ''
+    }
+    
     function generateRandom(min, max){
         return Math.floor(Math.random()*(max-min+1)+min);
     }
@@ -22,38 +27,91 @@ $(function(){
         var notTheOnion = "https://www.reddit.com/r/NotTheOnion/top/.json?sort=top&t=week";
         var theOnion = "https://www.reddit.com/r/theonion/top/.json?sort=top&t=year";
         var random = generateRandom(0,2);
-        console.log(random);
         
         if(random == 0){
             $.getJSON(theOnion, function(json){
                 var listing = $(json.data.children);
                 var postNum = generateRandom(0,24);
-                console.log("theOnion, post num " + postNum);
-                var post = listing[postNum].data;
-                generateHeadline(post);
+                
+                post.title = listing[postNum].data.title;
+                post.subreddit = listing[postNum].data.subreddit;
+                
+                generateHeadline(post.title);
             });
         }
         else{
             $.getJSON(notTheOnion, function(json){
                 var listing = $(json.data.children);
                 var postNum = generateRandom(0,24);
-                console.log("notTheOnion, post num " + postNum);
-                var post = listing[postNum].data;
-                generateHeadline(post);
+                
+                post.title = listing[postNum].data.title;
+                post.subreddit = listing[postNum].data.subreddit;
+                
+                generateHeadline(post.title);
             });
         }
     }   
     
     function generateHeadline(post){
-        //var headlineHTML = '';
-        var title = post.title;
+        var title = post;
+        
         $('#headline').html('<h1>'+title+'<h2>');
         $('#onionbutton').fadeIn(1000);
         $('#notbutton').fadeIn(1000);
     }
     
+    function showLink(answer){
+        
+        if (answer){
+            
+        }
+        else{
+            
+        }
+    }
+    
     $('#onionbutton').click(function(){
-        console.log("clicked");
+        console.log(post.subreddit); 
+        $('#notbutton').prop("disabled",true);
+        $('#onionbutton').prop("disabled",true);
+        
+        $('#onionbutton').fadeOut();
+        $('#notbutton').fadeOut();
+        
+        $('#notbutton').prop("disabled",false);
+        $('#onionbutton').prop("disabled",false);
+        
+        if(post.subreddit == "TheOnion"){
+            game.score++;
+            console.log("Correct, current score: " + game.score);
+            showLink(true);
+        }
+        else{
+            console.log("Incorrect, current score: " + game.score);
+            showLink(false);
+        }
+    });
+    
+    $('#notbutton').click(function() {
+        console.log(post.subreddit);
+        $('#notbutton').prop("disabled",true);
+        $('#onionbutton').prop("disabled",true);
+        
+        $('#onionbutton').fadeOut(1000);
+        $('#notbutton').fadeOut(1000);
+        
+        $('#notbutton').prop("disabled",false);
+        $('#onionbutton').prop("disabled",false);
+        
+        if(post.subreddit == "TheOnion"){
+            console.log("Incorrect, current score: " + game.score);
+            showLink(false);
+        }
+        else{
+            game.score++;
+            console.log("Correct, current score: " + game.score);
+            showLink(true);
+        }
     });
 
 });
